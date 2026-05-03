@@ -31,7 +31,6 @@
             position: relative;
         }
 
-        /* Animated background */
         .background-animation {
             position: fixed;
             top: 0;
@@ -49,7 +48,6 @@
             50% { transform: translate(30px, 30px); }
         }
 
-        /* Header/Navigation */
         header {
             position: sticky;
             top: 0;
@@ -92,6 +90,7 @@
             font-weight: 500;
             position: relative;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
 
         nav a::after {
@@ -131,7 +130,6 @@
             box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
         }
 
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -229,7 +227,6 @@
             left: 100%;
         }
 
-        /* Scroll Indicator */
         .scroll-indicator {
             position: absolute;
             bottom: 30px;
@@ -248,7 +245,6 @@
             color: var(--primary);
         }
 
-        /* Section Styles */
         section {
             padding: 6rem 2rem;
             max-width: 1400px;
@@ -265,7 +261,6 @@
             background-clip: text;
         }
 
-        /* Offers Grid */
         .offers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -322,10 +317,6 @@
         .offer-icon {
             font-size: 3rem;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .offer-card h3 {
@@ -360,7 +351,6 @@
             font-weight: bold;
         }
 
-        /* Portfolio Section */
         .portfolio {
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(255, 0, 110, 0.05) 100%);
             border-radius: 30px;
@@ -382,9 +372,6 @@
             cursor: pointer;
             transition: all 0.4s ease;
             opacity: 0;
-        }
-
-        .portfolio-item {
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
@@ -402,6 +389,7 @@
             justify-content: center;
             font-size: 3rem;
             transition: all 0.4s ease;
+            color: var(--primary);
         }
 
         .portfolio-item:hover .portfolio-image {
@@ -423,7 +411,6 @@
             font-size: 0.9rem;
         }
 
-        /* Form Section */
         .form-section {
             background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%);
             border-radius: 30px;
@@ -504,16 +491,59 @@
             animation-delay: 0.6s;
         }
 
-        .submit-btn:hover {
+        .submit-btn:hover:not(:disabled) {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
         }
 
-        .submit-btn:active {
-            transform: translateY(-1px);
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
-        /* Admin Modal */
+        [data-fs-success] {
+            background: linear-gradient(135deg, #00d84f, #00a835);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        [data-fs-success].show {
+            display: block;
+        }
+
+        [data-fs-error] {
+            background: linear-gradient(135deg, #ff006e, #d4004f);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            text-align: center;
+        }
+
+        [data-fs-error].show {
+            display: block;
+        }
+
+        [data-fs-error="name"],
+        [data-fs-error="email"],
+        [data-fs-error="phone"],
+        [data-fs-error="organization"],
+        [data-fs-error="message"] {
+            background: none;
+            color: #ff006e;
+            padding: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
         .admin-modal {
             display: none;
             position: fixed;
@@ -521,12 +551,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5, 8, 16, 0.9);
+            background: rgba(5, 8, 16, 0.95);
             z-index: 2000;
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(5px);
             animation: fadeIn 0.3s ease;
+            overflow-y: auto;
+            padding: 2rem;
         }
 
         @keyframes fadeIn {
@@ -543,9 +575,11 @@
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 3rem;
-            max-width: 500px;
-            width: 90%;
+            max-width: 900px;
+            width: 100%;
             animation: slideUp 0.4s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes slideUp {
@@ -559,6 +593,42 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .admin-tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: #a0a0a0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .admin-tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+        }
+
+        .admin-tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .admin-tab-content {
+            display: none;
+        }
+
+        .admin-tab-content.active {
+            display: block;
         }
 
         .close-modal {
@@ -577,7 +647,104 @@
             color: var(--secondary);
         }
 
-        /* Footer */
+        .admin-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+            font-weight: 600;
+        }
+
+        .admin-form-group input,
+        .admin-form-group textarea,
+        .admin-form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--light);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .admin-form-group input:focus,
+        .admin-form-group textarea:focus,
+        .admin-form-group select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .admin-form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .admin-save-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .admin-save-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .portfolio-item-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .delete-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 0, 110, 0.2);
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .delete-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .add-btn {
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
         footer {
             background: linear-gradient(135deg, rgba(10, 14, 39, 0.5), rgba(5, 8, 16, 0.8));
             border-top: 1px solid var(--glass-border);
@@ -604,31 +771,6 @@
             color: var(--primary);
         }
 
-        /* Success Message */
-        .success-message {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: linear-gradient(135deg, #00d84f, #00a835);
-            color: white;
-            padding: 1.5rem 2rem;
-            border-radius: 10px;
-            display: none;
-            z-index: 3000;
-            animation: slideInRight 0.4s ease-out;
-            box-shadow: 0 10px 30px rgba(0, 216, 79, 0.3);
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(400px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             nav {
                 gap: 1rem;
@@ -649,6 +791,7 @@
             .cta-button {
                 padding: 1rem 2rem;
                 font-size: 1rem;
+                margin: 0.5rem;
             }
 
             section {
@@ -663,145 +806,83 @@
             .admin-modal-content {
                 padding: 2rem;
             }
+
+            .admin-tabs {
+                flex-direction: column;
+            }
+
+            .admin-tab-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="background-animation"></div>
 
-    <!-- Header -->
     <header>
         <a href="#" class="logo">JB Digital</a>
         <nav>
-            <a href="#offers">Services</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#contact">Contact</a>
+            <a onclick="scrollToSection('offers')">Services</a>
+            <a onclick="scrollToSection('portfolio')">Portfolio</a>
+            <a onclick="scrollToSection('contact')">Contact</a>
             <button class="admin-btn" onclick="openAdmin()">Admin</button>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Transform Your Organization Digitally</h1>
-            <p>I help schools, clinics, and SACCOs go from paper to digital systems—quickly, simply, and affordably.</p>
-            <button class="cta-button" onclick="scrollToContact()">Get Your System Today</button>
-            <button class="cta-button" onclick="scrollToPortfolio()">See What I've Built</button>
+            <h1 id="heroTitle">Transform Your Organization Digitally</h1>
+            <p id="heroSubtitle">I help schools, clinics, and SACCOs go from paper to digital systems—quickly, simply, and affordably.</p>
+            <button class="cta-button" onclick="scrollToSection('contact')">Get Your System Today</button>
+            <button class="cta-button" onclick="scrollToSection('portfolio')">See What I've Built</button>
         </div>
         <div class="scroll-indicator">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
-    <!-- Offers Section -->
     <section id="offers">
         <h2>What I Offer</h2>
-        <div class="offers-grid">
-            <!-- Digital Products -->
-            <div class="offer-card">
-                <div class="offer-icon">📚</div>
-                <h3>Digital Products</h3>
-                <p>Ready-to-use guides and mini-courses</p>
-                <ul>
-                    <li>Freelancing guides (Global)</li>
-                    <li>Proposal writing templates</li>
-                    <li>"How to digitize" guides</li>
-                    <li>Mini-courses on automation</li>
-                </ul>
-                <button class="cta-button" style="width: 100%; margin: 0;">Learn More</button>
-            </div>
-
-            <!-- Services -->
-            <div class="offer-card">
-                <div class="offer-icon">💼</div>
-                <h3>Services</h3>
-                <p>Done-for-you professional solutions</p>
-                <ul>
-                    <li>Research proposals</li>
-                    <li>Data entry & formatting</li>
-                    <li>Virtual assistance</li>
-                    <li>Content writing</li>
-                </ul>
-                <button class="cta-button" style="width: 100%; margin: 0;">Get Started</button>
-            </div>
-
-            <!-- Apps & Systems -->
-            <div class="offer-card">
-                <div class="offer-icon">⚙️</div>
-                <h3>Apps & Systems</h3>
-                <p>Custom dashboards & automation</p>
-                <ul>
-                    <li>School management systems</li>
-                    <li>Clinic patient tracking</li>
-                    <li>SACCO loan tracking</li>
-                    <li>Custom Google Sheets</li>
-                </ul>
-                <button class="cta-button" style="width: 100%; margin: 0;">Request Demo</button>
-            </div>
-        </div>
+        <div class="offers-grid" id="offersGrid"></div>
     </section>
 
-    <!-- Portfolio Section -->
     <section id="portfolio">
         <h2>My Work</h2>
         <div class="portfolio">
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">📊</div>
-                    <div class="portfolio-content">
-                        <h3>School Dashboard</h3>
-                        <p>Complete student records, reports & analytics</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">🏥</div>
-                    <div class="portfolio-content">
-                        <h3>Clinic Tracker</h3>
-                        <p>Patient records, appointments & billing</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">💰</div>
-                    <div class="portfolio-content">
-                        <h3>SACCO System</h3>
-                        <p>Loan tracking, payments & member reports</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">🌐</div>
-                    <div class="portfolio-content">
-                        <h3>NGO Website</h3>
-                        <p>OVG – Donor, volunteer & partner portal</p>
-                    </div>
-                </div>
-            </div>
+            <div class="portfolio-grid" id="portfolioGrid"></div>
         </div>
     </section>
 
-    <!-- Contact/Form Section -->
     <section id="contact" class="form-section">
         <h2>Get Your Free Consultation</h2>
         <p style="text-align: center; color: #a0a0a0; margin-bottom: 2rem;">Tell me about your organization. I'll show you how to save time and money.</p>
         
-        <form class="form-container" onsubmit="handleFormSubmit(event)">
+        <div data-fs-success></div>
+        <div data-fs-error></div>
+
+        <form id="contact-form" class="form-container">
             <div class="form-group">
                 <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" required placeholder="John Doe">
+                <input type="text" id="name" name="name" required placeholder="John Doe" data-fs-field>
+                <span data-fs-error="name"></span>
             </div>
 
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required placeholder="john@example.com">
+                <input type="email" id="email" name="email" required placeholder="john@example.com" data-fs-field>
+                <span data-fs-error="email"></span>
             </div>
 
             <div class="form-group">
                 <label for="phone">Phone/WhatsApp</label>
-                <input type="tel" id="phone" name="phone" placeholder="+256 771 283 401">
+                <input type="tel" id="phone" name="phone" placeholder="+256 771 283 401" data-fs-field>
+                <span data-fs-error="phone"></span>
             </div>
 
             <div class="form-group">
                 <label for="organization">Organization Type</label>
-                <select id="organization" name="organization" required>
+                <select id="organization" name="organization" required data-fs-field>
                     <option value="">Select your organization...</option>
                     <option value="school">School</option>
                     <option value="clinic">Clinic/Hospital</option>
@@ -809,18 +890,19 @@
                     <option value="ngo">NGO</option>
                     <option value="other">Other</option>
                 </select>
+                <span data-fs-error="organization"></span>
             </div>
 
             <div class="form-group">
                 <label for="message">What's Your Main Challenge?</label>
-                <textarea id="message" name="message" required placeholder="Tell me about your biggest pain point..."></textarea>
+                <textarea id="message" name="message" required placeholder="Tell me about your biggest pain point..." data-fs-field></textarea>
+                <span data-fs-error="message"></span>
             </div>
 
-            <button type="submit" class="submit-btn">Send My Information</button>
+            <button type="submit" class="submit-btn" data-fs-submit-btn>Send My Information</button>
         </form>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-links">
             <a href="mailto:ampuriireblair200@gmail.com">Email: ampuriireblair200@gmail.com</a>
@@ -829,69 +911,183 @@
         <p>&copy; 2026 John Blair Digital Solutions. Transforming organizations one system at a time.</p>
     </footer>
 
-    <!-- Admin Modal -->
     <div class="admin-modal" id="adminModal">
         <div class="admin-modal-content">
             <button class="close-modal" onclick="closeAdmin()">&times;</button>
-            <h2>Admin Dashboard</h2>
+            <h2>🎛️ Admin Dashboard</h2>
             
-            <div class="form-group">
-                <label for="adminPassword">Enter Admin Password</label>
-                <input type="password" id="adminPassword" placeholder="Enter password">
+            <div id="passwordPrompt">
+                <div class="admin-form-group">
+                    <label for="adminPassword">Enter Admin Password</label>
+                    <input type="password" id="adminPassword" placeholder="Enter password">
+                </div>
+                <button class="admin-save-btn" onclick="verifyPassword()">Unlock Admin Panel</button>
             </div>
 
-            <button class="cta-button" style="width: 100%; margin-top: 1rem;" onclick="verifyPassword()">Unlock</button>
-            
-            <div id="adminPanel" style="display: none; margin-top: 2rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Edit Website Content</h3>
-                
-                <div class="form-group">
-                    <label for="heroHeading">Hero Heading</label>
-                    <input type="text" id="heroHeading" placeholder="Update hero title">
+            <div id="adminPanel" style="display: none;">
+                <div class="admin-tabs">
+                    <button class="admin-tab-btn active" onclick="switchAdminTab('hero')">Hero Section</button>
+                    <button class="admin-tab-btn" onclick="switchAdminTab('offers')">Services/Offers</button>
+                    <button class="admin-tab-btn" onclick="switchAdminTab('portfolio')">Portfolio/Demos</button>
+                    <button class="admin-tab-btn" onclick="switchAdminTab('branding')">Branding</button>
                 </div>
 
-                <div class="form-group">
-                    <label for="heroSubtitle">Hero Subtitle</label>
-                    <textarea id="heroSubtitle" placeholder="Update hero subtitle"></textarea>
+                <div id="hero-tab" class="admin-tab-content active">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Edit Hero Section</h3>
+                    <div class="admin-form-group">
+                        <label for="editHeroTitle">Hero Title</label>
+                        <input type="text" id="editHeroTitle" placeholder="Edit hero title">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="editHeroSubtitle">Hero Subtitle</label>
+                        <textarea id="editHeroSubtitle" placeholder="Edit hero subtitle"></textarea>
+                    </div>
+                    <button class="admin-save-btn" onclick="saveHero()">💾 Save Hero</button>
                 </div>
 
-                <div class="form-group">
-                    <label for="contactEmail">Contact Email</label>
-                    <input type="email" id="contactEmail" placeholder="your@email.com">
+                <div id="offers-tab" class="admin-tab-content">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Edit Services/Offers</h3>
+                    <div id="offersEditorContainer"></div>
+                    <button class="add-btn" onclick="addNewOffer()">+ Add New Service</button>
+                    <button class="admin-save-btn" onclick="saveOffers()" style="margin-top: 1rem;">💾 Save All Services</button>
                 </div>
 
-                <button class="cta-button" style="width: 100%; margin-top: 1.5rem;" onclick="saveChanges()">💾 Save Changes</button>
+                <div id="portfolio-tab" class="admin-tab-content">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Edit Portfolio & Demos</h3>
+                    <div id="portfolioEditorContainer"></div>
+                    <button class="add-btn" onclick="addNewPortfolioItem()">+ Add New Demo/Project</button>
+                    <button class="admin-save-btn" onclick="savePortfolio()" style="margin-top: 1rem;">💾 Save All Projects</button>
+                </div>
+
+                <div id="branding-tab" class="admin-tab-content">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Branding & Colors</h3>
+                    <div class="admin-form-group">
+                        <label for="editPrimaryColor">Primary Color</label>
+                        <input type="color" id="editPrimaryColor">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="editSecondaryColor">Secondary Color</label>
+                        <input type="color" id="editSecondaryColor">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="editAccentColor">Accent Color</label>
+                        <input type="color" id="editAccentColor">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="editContactEmail">Contact Email</label>
+                        <input type="email" id="editContactEmail">
+                    </div>
+                    <div class="admin-form-group">
+                        <label for="editContactPhone">Contact Phone</label>
+                        <input type="tel" id="editContactPhone">
+                    </div>
+                    <button class="admin-save-btn" onclick="saveBranding()">💾 Save Branding</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Success Message -->
-    <div class="success-message" id="successMessage">
-        <i class="fas fa-check-circle"></i> Thank you! I'll be in touch shortly.
-    </div>
-
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
     <script>
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        const defaultData = {
+            hero: {
+                title: 'Transform Your Organization Digitally',
+                subtitle: 'I help schools, clinics, and SACCOs go from paper to digital systems—quickly, simply, and affordably.'
+            },
+            offers: [
+                {
+                    icon: '📚',
+                    title: 'Digital Products',
+                    description: 'Ready-to-use guides and mini-courses',
+                    features: ['Freelancing guides (Global)', 'Proposal writing templates', '"How to digitize" guides', 'Mini-courses on automation']
+                },
+                {
+                    icon: '💼',
+                    title: 'Services',
+                    description: 'Done-for-you professional solutions',
+                    features: ['Research proposals', 'Data entry & formatting', 'Virtual assistance', 'Content writing']
+                },
+                {
+                    icon: '⚙️',
+                    title: 'Apps & Systems',
+                    description: 'Custom dashboards & automation',
+                    features: ['School management systems', 'Clinic patient tracking', 'SACCO loan tracking', 'Custom Google Sheets']
+                }
+            ],
+            portfolio: [
+                { icon: '📊', title: 'School Dashboard', description: 'Complete student records, reports & analytics' },
+                { icon: '🏥', title: 'Clinic Tracker', description: 'Patient records, appointments & billing' },
+                { icon: '💰', title: 'SACCO System', description: 'Loan tracking, payments & member reports' },
+                { icon: '🌐', title: 'NGO Website', description: 'OVG – Donor, volunteer & partner portal' }
+            ],
+            branding: {
+                primaryColor: '#00d4ff',
+                secondaryColor: '#ff006e',
+                accentColor: '#ffbe0b',
+                contactEmail: 'ampuriireblair200@gmail.com',
+                contactPhone: '+256771283401'
+            }
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
-                }
-            });
-        }, observerOptions);
+        function loadData() {
+            const saved = localStorage.getItem('siteData');
+            return saved ? JSON.parse(saved) : defaultData;
+        }
 
-        document.querySelectorAll('.offer-card, .portfolio-item').forEach(el => {
-            el.style.opacity = '0';
-            observer.observe(el);
-        });
+        function saveData(data) {
+            localStorage.setItem('siteData', JSON.stringify(data));
+        }
 
-        // Admin functions
+        let siteData = loadData();
+
+        function initializeWebsite() {
+            renderOffers();
+            renderPortfolio();
+            applyBranding();
+            initFormspree();
+        }
+
+        function renderOffers() {
+            const offersGrid = document.getElementById('offersGrid');
+            offersGrid.innerHTML = siteData.offers.map((offer, index) => `
+                <div class="offer-card">
+                    <div class="offer-icon">${offer.icon}</div>
+                    <h3>${offer.title}</h3>
+                    <p>${offer.description}</p>
+                    <ul>
+                        ${offer.features.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                    <button class="cta-button" style="width: 100%; margin: 0;">Learn More</button>
+                </div>
+            `).join('');
+        }
+
+        function renderPortfolio() {
+            const portfolioGrid = document.getElementById('portfolioGrid');
+            portfolioGrid.innerHTML = siteData.portfolio.map((item, index) => `
+                <div class="portfolio-item">
+                    <div class="portfolio-image">${item.icon}</div>
+                    <div class="portfolio-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function applyBranding() {
+            const root = document.documentElement;
+            root.style.setProperty('--primary', siteData.branding.primaryColor);
+            root.style.setProperty('--secondary', siteData.branding.secondaryColor);
+            root.style.setProperty('--accent', siteData.branding.accentColor);
+        }
+
+        function initFormspree() {
+            if (window.formspree) {
+                window.formspree('initForm', { formElement: '#contact-form', formId: 'mojrjnal' });
+            }
+        }
+
         function openAdmin() {
             document.getElementById('adminModal').classList.add('show');
             document.getElementById('adminPassword').focus();
@@ -901,96 +1097,203 @@
             document.getElementById('adminModal').classList.remove('show');
             document.getElementById('adminPassword').value = '';
             document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('passwordPrompt').style.display = 'block';
         }
 
         function verifyPassword() {
             const password = document.getElementById('adminPassword').value;
-            const correctPassword = 'Blair2026'; // Password for admin
+            const correctPassword = 'Blair2026';
             
             if (password === correctPassword) {
                 document.getElementById('adminPanel').style.display = 'block';
-                document.getElementById('adminPassword').style.borderColor = 'var(--primary)';
+                document.getElementById('passwordPrompt').style.display = 'none';
                 loadEditableContent();
             } else {
                 alert('❌ Incorrect password. Try again.');
-                document.getElementById('adminPassword').style.borderColor = 'var(--secondary)';
                 document.getElementById('adminPassword').value = '';
             }
         }
 
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.admin-tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
         function loadEditableContent() {
-            document.getElementById('heroHeading').value = document.querySelector('.hero h1').textContent;
-            document.getElementById('heroSubtitle').value = document.querySelector('.hero p').textContent;
-            document.getElementById('contactEmail').value = 'ampuriireblair200@gmail.com';
+            document.getElementById('editHeroTitle').value = siteData.hero.title;
+            document.getElementById('editHeroSubtitle').value = siteData.hero.subtitle;
+
+            const offersEditor = document.getElementById('offersEditorContainer');
+            offersEditor.innerHTML = siteData.offers.map((offer, index) => `
+                <div class="portfolio-item-box">
+                    <div class="admin-form-group">
+                        <label>Service Icon/Emoji</label>
+                        <input type="text" value="${offer.icon}" placeholder="📚" maxlength="2" class="offer-icon-${index}">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Service Title</label>
+                        <input type="text" value="${offer.title}" placeholder="Service title" class="offer-title-${index}">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Service Description</label>
+                        <textarea placeholder="Service description" class="offer-desc-${index}">${offer.description}</textarea>
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Features (one per line)</label>
+                        <textarea placeholder="Feature 1&#10;Feature 2&#10;Feature 3" class="offer-features-${index}">${offer.features.join('\n')}</textarea>
+                    </div>
+                    <button class="delete-btn" onclick="deleteOffer(${index})">🗑️ Delete Service</button>
+                </div>
+            `).join('');
+
+            const portfolioEditor = document.getElementById('portfolioEditorContainer');
+            portfolioEditor.innerHTML = siteData.portfolio.map((item, index) => `
+                <div class="portfolio-item-box">
+                    <div class="admin-form-group">
+                        <label>Project Icon/Emoji</label>
+                        <input type="text" value="${item.icon}" placeholder="📊" maxlength="2" class="portfolio-icon-${index}">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Project Title</label>
+                        <input type="text" value="${item.title}" placeholder="Project title" class="portfolio-title-${index}">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Project Description</label>
+                        <textarea placeholder="Project description" class="portfolio-desc-${index}">${item.description}</textarea>
+                    </div>
+                    <button class="delete-btn" onclick="deletePortfolioItem(${index})">🗑️ Delete Project</button>
+                </div>
+            `).join('');
+
+            document.getElementById('editPrimaryColor').value = siteData.branding.primaryColor;
+            document.getElementById('editSecondaryColor').value = siteData.branding.secondaryColor;
+            document.getElementById('editAccentColor').value = siteData.branding.accentColor;
+            document.getElementById('editContactEmail').value = siteData.branding.contactEmail;
+            document.getElementById('editContactPhone').value = siteData.branding.contactPhone;
         }
 
-        function saveChanges() {
-            const heading = document.getElementById('heroHeading').value;
-            const subtitle = document.getElementById('heroSubtitle').value;
-            
-            if (heading) document.querySelector('.hero h1').textContent = heading;
-            if (subtitle) document.querySelector('.hero p').textContent = subtitle;
-            
-            alert('✅ Changes saved successfully!');
-            closeAdmin();
+        function saveHero() {
+            siteData.hero.title = document.getElementById('editHeroTitle').value;
+            siteData.hero.subtitle = document.getElementById('editHeroSubtitle').value;
+            document.getElementById('heroTitle').textContent = siteData.hero.title;
+            document.querySelector('.hero p').textContent = siteData.hero.subtitle;
+            saveData(siteData);
+            alert('✅ Hero section updated!');
         }
 
-        // Form submission
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                organization: document.getElementById('organization').value,
-                message: document.getElementById('message').value,
-                timestamp: new Date().toLocaleString()
-            };
-
-            // Store in localStorage
-            let submissions = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
-            submissions.push(formData);
-            localStorage.setItem('formSubmissions', JSON.stringify(submissions));
-
-            // Show success message
-            const successMsg = document.getElementById('successMessage');
-            successMsg.classList.add('show');
-            
-            // Reset form
-            event.target.reset();
-            
-            // Log to console for demo
-            console.log('Form Data:', formData);
-
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                successMsg.classList.remove('show');
-            }, 5000);
+        function saveOffers() {
+            siteData.offers = siteData.offers.map((offer, index) => ({
+                icon: document.querySelector('.offer-icon-' + index).value,
+                title: document.querySelector('.offer-title-' + index).value,
+                description: document.querySelector('.offer-desc-' + index).value,
+                features: document.querySelector('.offer-features-' + index).value.split('\n').filter(f => f.trim())
+            }));
+            saveData(siteData);
+            renderOffers();
+            alert('✅ Services updated!');
         }
 
-        // Smooth scrolling
-        function scrollToContact() {
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        function addNewOffer() {
+            siteData.offers.push({
+                icon: '✨',
+                title: 'New Service',
+                description: 'Service description',
+                features: ['Feature 1', 'Feature 2', 'Feature 3']
+            });
+            saveData(siteData);
+            loadEditableContent();
         }
 
-        function scrollToPortfolio() {
-            document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
+        function deleteOffer(index) {
+            if (confirm('Delete this service?')) {
+                siteData.offers.splice(index, 1);
+                saveData(siteData);
+                loadEditableContent();
+                renderOffers();
+            }
         }
 
-        // Close modal when clicking outside
+        function savePortfolio() {
+            siteData.portfolio = siteData.portfolio.map((item, index) => ({
+                icon: document.querySelector('.portfolio-icon-' + index).value,
+                title: document.querySelector('.portfolio-title-' + index).value,
+                description: document.querySelector('.portfolio-desc-' + index).value
+            }));
+            saveData(siteData);
+            renderPortfolio();
+            alert('✅ Projects/Demos updated!');
+        }
+
+        function addNewPortfolioItem() {
+            siteData.portfolio.push({
+                icon: '🎯',
+                title: 'New Project',
+                description: 'Project description'
+            });
+            saveData(siteData);
+            loadEditableContent();
+        }
+
+        function deletePortfolioItem(index) {
+            if (confirm('Delete this project?')) {
+                siteData.portfolio.splice(index, 1);
+                saveData(siteData);
+                loadEditableContent();
+                renderPortfolio();
+            }
+        }
+
+        function saveBranding() {
+            siteData.branding.primaryColor = document.getElementById('editPrimaryColor').value;
+            siteData.branding.secondaryColor = document.getElementById('editSecondaryColor').value;
+            siteData.branding.accentColor = document.getElementById('editAccentColor').value;
+            siteData.branding.contactEmail = document.getElementById('editContactEmail').value;
+            siteData.branding.contactPhone = document.getElementById('editContactPhone').value;
+            saveData(siteData);
+            applyBranding();
+            alert('✅ Branding updated!');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
         document.getElementById('adminModal').addEventListener('click', (e) => {
             if (e.target.id === 'adminModal') {
                 closeAdmin();
             }
         });
 
-        // Keyboard shortcut for admin (Ctrl+Shift+A)
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.shiftKey && e.key === 'A') {
                 openAdmin();
             }
         });
+
+        window.addEventListener('load', () => {
+            initializeWebsite();
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+
+        setTimeout(() => {
+            document.querySelectorAll('.offer-card, .portfolio-item').forEach(el => {
+                observer.observe(el);
+            });
+        }, 100);
     </script>
 </body>
 </html>
